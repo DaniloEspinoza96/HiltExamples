@@ -1,17 +1,30 @@
 package com.example.hiltapplication.di
 
 import com.example.hiltapplication.UserService
-import com.example.hiltapplication.UserServiceImpl
+import com.example.hiltapplication.interfaceImplementations.UserServiceDosImpl
+import com.example.hiltapplication.interfaceImplementations.UserServiceUnoImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
+import javax.inject.Qualifier
 
 // @15 Ahora crearemos el módulo que nos permitirá proporcionar esta dependencia donde sea que se requiera.
 
 // InstallIn define en qué tipo de componente se inyectará esta dependencia.
 // Module es para indicar que esto es un Hilt Module. Este informa a hilt cómo proporcionar instancias de ciertos tipos.
+
+// @20 Ahora agregaremos dos implementaciones y veremos como trabajarlas.
+// Para ello deberemos agregar dos cualificadores.
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class UserServiceUno
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class UserServiceDos
 
 @InstallIn(ActivityComponent::class)
 @Module
@@ -21,11 +34,27 @@ abstract class UserServiceModule {
 //     (hay ViewModelScoped y no se cuantos más, investigar).
     // Por último la función abstracta dice qué implementación proporcionar cuando se pida una instancia de la interfaz UserService.
 
+//    @Binds
+//    @ActivityScoped
+//    abstract fun bindUserService(
+//        userServiceImpl: UserServiceImpl
+//    ): UserService
+
+    // @21 ahora deberemos implementar ambos
+    @UserServiceUno
     @Binds
     @ActivityScoped
-    abstract fun bindUserService(
-        userServiceImpl: UserServiceImpl
+    abstract fun bindUserServiceUno(
+        userServiceUnoImpl: UserServiceUnoImpl
     ): UserService
+
+    @UserServiceDos
+    @Binds
+    @ActivityScoped
+    abstract fun bindUserServiceDos(
+        userServiceDosImpl: UserServiceDosImpl
+    ): UserService
+
 }
 
 // Con esto podremos pasar una interfaz mediante vinculación o inyección de campo.

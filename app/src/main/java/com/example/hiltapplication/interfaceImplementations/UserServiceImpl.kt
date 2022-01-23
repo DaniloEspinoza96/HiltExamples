@@ -1,5 +1,6 @@
-package com.example.hiltapplication
+package com.example.hiltapplication.interfaceImplementations
 
+import com.example.hiltapplication.UserService
 import timber.log.Timber
 import javax.inject.Inject
 
