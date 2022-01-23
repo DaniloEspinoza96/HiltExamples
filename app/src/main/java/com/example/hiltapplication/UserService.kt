@@ -1,6 +1,9 @@
 package com.example.hiltapplication
 
-// @13 Ahora pasamos a otra unidad, inyectar interfaces. Crearemos una interfaz común y silvestre.
+import retrofit2.Call
+import retrofit2.http.GET
+
 interface UserService {
-    fun helloWorld(): String
+    @GET("todos")
+    fun listUsers(): Call<List<User>>
 }

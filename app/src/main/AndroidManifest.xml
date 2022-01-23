@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hiltapplication">
+    <uses-permission android:name="android.permission.INTERNET" />
 
 <!--    @5 Debemos agregar al manifest el atributo name y poner MainApplication para que se adhiera a la actividad correspondiente-->
     <application
